@@ -10,7 +10,7 @@ type node struct {
 }
 ```
 
-# Preorder traversal
+# Postorder traversal
 
 Implement a function `func postorderTraversal(root *node, sink func(v int))` (+tests) that
 performs a preorder traversal, i.e.
