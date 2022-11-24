@@ -10,14 +10,18 @@ type node struct {
 }
 ```
 
-# Postorder traversal
+# Level order traversal
 
-Implement a function `func postorderTraversal(root *node, sink func(v int))` (+tests) that
-performs a preorder traversal, i.e.
+Implement a function `func levelOrderTraversal(root *node, sink func(v int))` (+tests) that
+performs a level order traversal, i.e.
 
-1. visits the left subtree,
-2. visits the right subtree,
-3. visits the current node.
+1. a root node (a node with height 0) is visited;
+2. nodes with height 1 are visited from left to right;
+3. nodes with height 2 are visited from left to right;
+4. etc.
+
+`levelOrderTraversal` must have the worst-time $O(n)$ time complexity and must use
+$O(n)$ memory.
 
 ## Example
 
@@ -31,7 +35,7 @@ For the following tree
 1     6 8    10
 ```
 
-the postorder traversal is `1 6 5 8 10 9 7`.
+the level traversal is `7 5 9 1 6 8 10`.
 
 
 # Deletion
@@ -43,7 +47,7 @@ node with a given key `k` from a binary search tree with a root node `root`.
 deletion, the tree must represent a binary search tree.
 
 `deleteNode` must have the worst-time $O(\log n)$ time complexity and must use
-$O(1)$ memory.
+$O(\log n)$ memory.
 
 ## Examples
 
