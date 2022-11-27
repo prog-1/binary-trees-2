@@ -31,3 +31,28 @@ func levelOrderTraversal(root *node, sink func(v int)) (res []int) {
 	return output
 
 }
+
+func deleteNode(root *node, k int) *node {
+	if root == nil {
+		return root
+	}
+	if k < root.val {
+		root.left = deleteNode(root.left, k)
+	} else if k > root.val {
+		root.right = deleteNode(root.right, k)
+	} else {
+		if root.left == nil {
+			return root.right
+		} else if root.right == nil {
+			return root.left
+		} else {
+			r := &root.right
+			for (*r).left != nil {
+				r = &(*r).left
+			}
+			root.val = (*r).val
+			*r = nil
+		}
+	}
+	return root
+}
