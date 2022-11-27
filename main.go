@@ -14,36 +14,22 @@ func (n *node) r(r *node) *node { n.right = r; return n }
 func levelOrderTraversal(root *node, sink func(v int)) {
 	// Requirements: Space/Time Complexity = O(n)
 
-	type list struct {
-		val  *node
-		next *list
-	}
-	insertHead := func(l *list, val *node) *list {
-		n := &list{val, l}
-		return n
-	}
-	removeHead := func(l *list) *list {
-		l = l.next
-		return l
-	}
-
 	if root == nil {
 		return
 	}
 
-	q := insertHead(nil, root)
+	var s []*node
+	s = append(s, root)
+	for len(s) != 0 {
+		cur := &s[0]
+		sink((*cur).val)
+		s = s[1:] // deleting first element
 
-	cur := root
-	for q != nil {
-		cur = q.val
-		sink(q.val.val)
-		q = removeHead(q)
-
-		if cur.right != nil {
-			q = insertHead(q, cur.right)
+		if (*cur).left != nil {
+			s = append(s, (*cur).left)
 		}
-		if cur.left != nil {
-			q = insertHead(q, cur.left)
+		if (*cur).right != nil {
+			s = append(s, (*cur).right)
 		}
 	}
 
