@@ -40,7 +40,9 @@ func main() {
 		l(n(5).
 			l(n(2)).
 			r(n(7))).
-		r(n(15))
+		r(n(15).
+			l(n(1)).
+			r(n(4)))
 
-	levelOrderTraversal(root, func(v int) { fmt.Println(v) }) // 10 5 15 2 7
+	levelOrderTraversal(root, func(v int) { fmt.Println(v) }) // 10 5 15 2 7 1 4
 }
