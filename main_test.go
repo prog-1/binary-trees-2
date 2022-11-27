@@ -60,7 +60,7 @@ func TestDeleteNode(t *testing.T) {
 			deleteNode(tree, element)
 			var new_elements []int
 			levelOrderTraversal(tc.root(), func(v int) { elements = append(new_elements, v) })
-			if isBST(tree) || Contains(new_elements, element) {
+			if !isBST(tree) || Contains(new_elements, element) {
 				var buf bytes.Buffer
 				printTree(tree, &buf)
 				t.Errorf("this modified tree is not BST or contains removed element %v: \n%v", element, buf.String())
