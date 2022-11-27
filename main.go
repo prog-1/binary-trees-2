@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 type node struct {
 	val         int
 	left, right *node
@@ -39,7 +35,31 @@ func height(root *node) int {
 		return height(root.right) + 1
 	}
 }
-func main() {
-	tree := &node{val: 9, left: &node{val: 3, left: &node{val: 0}, right: &node{val: 7}}, right: &node{val: 15, left: &node{val: 14}, right: &node{val: 19}}}
-	levelOrderTraversal(tree, func(v int) { fmt.Println(v) })
+
+func deleteNode(root *node, k int) *node {
+	if root == nil {
+		return root
+	}
+	if k < root.val {
+		root.left = deleteNode(root.left, k)
+	} else if k > root.val {
+		root.right = deleteNode(root.right, k)
+	} else {
+		if root.left == nil {
+			return root.right
+		} else if root.right == nil {
+			return root.left
+		} else {
+			root.val = min(root.right)
+			root.right = deleteNode(root.right, root.val)
+		}
+	}
+	return root
+}
+
+func min(root *node) int {
+	for root.left != nil {
+		root = root.left
+	}
+	return root.val
 }
